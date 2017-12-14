@@ -1,0 +1,126 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<link href="@Url.Content("~/Content/style.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/chocolat.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/font-awesome.min.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/common.css")" rel="stylesheet" type="text/css" />
+<br/>
+<div class="jumbotron" >
+    <h1>Приложение учета животных</h1>
+    <p class="lead">Приложение для учета животных и их популяций предназначено для получения наглядной информации о местах обитания и о количественном соотношении животных Беларуси. </p>
+    <p  class="readmore-w3">@Html.ActionLink("Перейти к карте", "Index", "Map")</p>
+</div>
+<!--//Header-->
+<!--offer-->
+<div class="offer-w3layouts" id="about">
+    <div class="container">
+        <div class="offer-header-agile">
+            <h3 class="tittle">Начало <span>работы</span></h3>
+            <p>ниже представлены наиболее часто посещаемые страницы приложения</p>
+        </div>
+        <div class="row">
+            <div class="col-md-4 offer-grid ">
+                <div class="icon">
+                    <i class="glyphicon glyphicon-globe" aria-hidden="true"></i>
+                </div>
+                <h4>Экосистемы</h4>
+                <p>Приложение предоставляет информацию о всех экосистемах Беларуси.
+                    Это позволит вам получить большой объем данных для научно-исследовательской деятельности.</p>
+                <div class="readmore-w3"><a class="readmore" href="#" data-toggle="modal" data-target="#myModal2">Read More</a></div>
+                <!-- Modal2 -->
+                <div class="modal fade" id="myModal2" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4>Aenean sagittis</h4>
+                                <h5>Экосистемы</h5>
+                                <p>Приложение предоставляет достоверную информацию о всех экосистемах Беларуси.
+                                    Это позволит вам получить большой объем данных для научно-исследовательской деятельности.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- //Modal2 -->
+            </div>
+            <div class="col-md-4 offer-grid ">
+                <div class="icon">
+                    <i class="glyphicon glyphicon-tree-deciduous" aria-hidden="true"></i>
+                </div>
+                <h4>Добавление учёта</h4>
+                <p> В данном приложении пользователь может добавить локацию,
+                    в которой производились исследования животных, для того, 
+                    чтобы информация о локации была доступна всем пользователям.</p>
+                <div class="readmore-w3"><a class="readmore" href="#" data-toggle="modal" data-target="#myModal2">Read More</a></div>
+            </div>
+            <div class="col-md-4 offer-grid ">
+                <div class="icon">
+                    <i class="glyphicon glyphicon-edit" aria-hidden="true"></i>
+                </div>
+                <h4>Виды и отряды животных</h4>
+                <p>Здесь вы сможете получить все виды и отряды животных, обитающих  в 
+                    Беларуси, а также добавить свой вид или отряд животных,если такого вида/отряда
+                    не наблюдается в списках.</p>
+                <div class="readmore-w3">@Html.ActionLink("Перейти к видам", "Index", "Detachment")</div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+<!--//offer-->
+<!--footer-->
+<div class="footer container-fluid">
+    <div class="container">
+        <div class="footer-content-agile">
+            <div class="col-md-4 about-us-agile">
+                <h4>О приложении</h4>
+                <div class="aboutus-right-wthree">
+                    <p>Данное приложение является курсовым проектом по предмету "Базы данных". По всем вопросам обращаться не к разработчикам.</p>
+                    <input type="submit" value="Пожаловаться" />
+                </div>
+            </div>
+            <div class="col-md-4 news-letter-agileits-w3layouts">
+                <h4>Наши новости</h4>
+                <p>Зарегистрируйтесь и подпишитесь, чтобы всегда быть в курсе!</p>
+                <form action="#" method="post">
+                    <input type="email" name="Email" placeholder="Введите ваш Email" required="" />
+                    <input type="submit" value="Подписаться" />
+                </form>
+            </div>
+            <div class="col-md-4 about-us-agile">
+                <h4>Контакты</h4>
+                <div class="aboutus-right-wthree">
+                    <p>Электронная почта: <u>liza-98k@mail.ru</u> </p>
+                    <p>Телефон: <u>+37529000000</u> </p>
+                    <ul>
+                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                        <li><a href="#"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/footer -->
+<!-- smooth scrolling -->
+<script type="text/javascript">
+    $(document).ready(function() {
+        /*
+            var defaults = {
+            containerID: 'toTop', // fading element id
+            containerHoverID: 'toTopHover', // fading element hover id
+            scrollSpeed: 1200,
+            easingType: 'linear' 
+            };
+        */								
+        $().UItoTop({ easingType: 'easeOutQuart' });
+    });
+</script>
+<a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+<!-- //smooth scrolling -->
+<script type="text/javascript" src="js/bootstrap-3.1.1.min.js"></script>
