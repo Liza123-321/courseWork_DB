@@ -8,7 +8,7 @@ using CourseWork.DAL_Models;
 
 namespace CourseWork.Helpers
 {
-    public class RegisterationAuthorHelper
+    public class MethodHelper
     {
         private SqlConnection connect;
         public const string ConnectionString = @"Data Source=.;Initial Catalog=ReliseCourse;Integrated Security=True";
@@ -24,11 +24,9 @@ namespace CourseWork.Helpers
             connect.Close();
         }
 
-
-
-        public void CreateReg_author(string Id, DateTime Reg_date, string Author)
+        public void CreateMethod(string Id, string Descript, string Units)
         {
-            string sqlExpression = "addRegistration_author";
+            string sqlExpression = "addMethod";
 
             OpenConnection(ConnectionString);
             using (SqlCommand command = new SqlCommand(sqlExpression, connect))
@@ -42,27 +40,29 @@ namespace CourseWork.Helpers
                 };
 
                 command.Parameters.Add(idParameter);
-                SqlParameter dateParameter = new SqlParameter
+
+                SqlParameter descParameter = new SqlParameter
                 {
-                    ParameterName = "@Reg_date",
-                    Value = Reg_date
+                    ParameterName = "@Descript",
+                    Value = Descript
                 };
 
-                command.Parameters.Add(dateParameter);
-                SqlParameter authorParameter = new SqlParameter
+                command.Parameters.Add(descParameter);
+                SqlParameter unitsParameter = new SqlParameter
                 {
-                    ParameterName = "@Author",
-                    Value = Author
+                    ParameterName = "@Units",
+                    Value = Units
                 };
-                command.Parameters.Add(authorParameter);
+
+                command.Parameters.Add(unitsParameter);
                 command.ExecuteScalar();
             }
             CloseConnection();
         }
 
-        public void DeleteReg_author(string Id)
+        public void DeleteMethod(string Id)
         {
-            string sqlExpression = "deleteRegistration_author";
+            string sqlExpression = "deleteMethod";
 
             OpenConnection(ConnectionString);
             using (SqlCommand cmd = new SqlCommand(sqlExpression, connect))
@@ -79,10 +79,10 @@ namespace CourseWork.Helpers
             }
         }
 
-        public List<Registration_author> GetAllReg_author()
+        public List<Method> GetAllMethods()
         {
-            string sqlExpression = "selectAllReg_author";
-            List<Registration_author> regs_author = new List<Registration_author>();
+            string sqlExpression = "selectAllMethod";
+            List<Method> methods = new List<Method>();
             OpenConnection(ConnectionString);
             using (SqlCommand cmd = new SqlCommand(sqlExpression, connect))
             {
@@ -93,23 +93,22 @@ namespace CourseWork.Helpers
                 {
                     while (dr.Read())
                     {
-                        regs_author.Add(new Registration_author
+                        methods.Add(new Method
                         {
                             Id = dr.GetValue(0).ToString(),
-                            Reg_date = Convert.ToDateTime(dr.GetValue(1).ToString()),
-                            Author = dr.GetValue(2).ToString(),
-
+                            Descript = dr.GetValue(1).ToString(),
+                            Units = dr.GetValue(2).ToString(),
                         });
                     }
                 }
-                return regs_author;
+                return methods;
             }
         }
 
-        public Registration_author GetReg_authorById(string Id)
+        public Method GetMethodById(string Id)
         {
-            string sqlExpression = "selectReg_authorById";
-            Registration_author reg_author = null;
+            string sqlExpression = "selectMethodById";
+            Method method = null;
 
             OpenConnection(ConnectionString);
             using (SqlCommand cmd = new SqlCommand(sqlExpression, connect))
@@ -129,55 +128,17 @@ namespace CourseWork.Helpers
                 {
                     while (dr.Read())
                     {
-                        reg_author = new Registration_author
+                        method = new Method
                         {
                             Id = dr.GetValue(0).ToString(),
-                            Reg_date = Convert.ToDateTime(dr.GetValue(1).ToString()),
-                            Author = dr.GetValue(2).ToString(),
+                            Descript = dr.GetValue(1).ToString(),
+                            Units = dr.GetValue(2).ToString(),
                         };
                     }
                 }
-                return reg_author;
+                return method;
             }
 
         }
-
-        public Registration_author GetReg_authorByAuthorId(string Id)
-        {
-            string sqlExpression = "selectReg_authorByAythorName";
-            Registration_author reg_author = null;
-
-            OpenConnection(ConnectionString);
-            using (SqlCommand cmd = new SqlCommand(sqlExpression, connect))
-            {
-                cmd.CommandType = CommandType.StoredProcedure;
-
-                SqlParameter loginParameter = new SqlParameter
-                {
-                    ParameterName = "@Id",
-                    Value = Id
-                };
-                cmd.Parameters.Add(loginParameter);
-
-                SqlDataReader dr = cmd.ExecuteReader();
-
-                if (dr.HasRows)
-                {
-                    while (dr.Read())
-                    {
-                        reg_author = new Registration_author
-                        {
-                            Id = dr.GetValue(0).ToString(),
-                            Reg_date = Convert.ToDateTime(dr.GetValue(1).ToString()),
-                            Author = dr.GetValue(2).ToString(),
-                        };
-                    }
-                }
-                return reg_author;
-            }
-
-        }
-
-
     }
 }

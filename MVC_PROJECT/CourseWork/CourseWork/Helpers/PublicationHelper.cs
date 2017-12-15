@@ -8,7 +8,7 @@ using CourseWork.DAL_Models;
 
 namespace CourseWork.Helpers
 {
-    public class EcosystemHelper
+    public class PublicationHelper
     {
         private SqlConnection connect;
         public const string ConnectionString = @"Data Source=.;Initial Catalog=ReliseCourse;Integrated Security=True";
@@ -24,9 +24,9 @@ namespace CourseWork.Helpers
             connect.Close();
         }
 
-        public void CreateEcosystem(string Id, string Ecosystem_name,string Biotope,string Coordinates)
+        public void CreatePublication(string Id, string Author, DateTime Publication_date, string link)
         {
-            string sqlExpression = "addEcosystem";
+            string sqlExpression = "addPublication";
 
             OpenConnection(ConnectionString);
             using (SqlCommand command = new SqlCommand(sqlExpression, connect))
@@ -43,31 +43,31 @@ namespace CourseWork.Helpers
 
                 SqlParameter nameParameter = new SqlParameter
                 {
-                    ParameterName = "@Ecosystem_name",
-                    Value = Ecosystem_name
+                    ParameterName = "@Author",
+                    Value = Author
                 };
                 command.Parameters.Add(nameParameter);
-                SqlParameter bitopeParameter = new SqlParameter
+                SqlParameter dateParameter = new SqlParameter
                 {
-                    ParameterName = "@Coordinates",
-                    Value = Coordinates
+                    ParameterName = "@Publication_date",
+                    Value = Publication_date
                 };
-                command.Parameters.Add(bitopeParameter);
-                SqlParameter coordParameter = new SqlParameter
+                command.Parameters.Add(dateParameter);
+                SqlParameter linkParameter = new SqlParameter
                 {
-                    ParameterName = "@Biotope",
-                    Value = Biotope
+                    ParameterName = "@link",
+                    Value = link
                 };
-                command.Parameters.Add(coordParameter);
+                command.Parameters.Add(linkParameter);
 
                 command.ExecuteScalar();
             }
             CloseConnection();
         }
 
-        public void DeleteEcosystem(string Id)
+        public void DeletePublication(string Id)
         {
-            string sqlExpression = "deleteEcosystem";
+            string sqlExpression = "deletePublication";
 
             OpenConnection(ConnectionString);
             using (SqlCommand cmd = new SqlCommand(sqlExpression, connect))
@@ -84,10 +84,10 @@ namespace CourseWork.Helpers
             }
         }
 
-        public List<Ecosystem> GetAllEcosystems()
+        public List<Publication> GetAllEcosystems()
         {
-            string sqlExpression = "selectAllEcosystem";
-            List<Ecosystem> ecosystems = new List<Ecosystem>();
+            string sqlExpression = "selectAllPublication";
+            List<Publication> publication = new List<Publication>();
             OpenConnection(ConnectionString);
             using (SqlCommand cmd = new SqlCommand(sqlExpression, connect))
             {
@@ -98,23 +98,23 @@ namespace CourseWork.Helpers
                 {
                     while (dr.Read())
                     {
-                        ecosystems.Add(new Ecosystem
+                        publication.Add(new Publication
                         {
                             Id = dr.GetValue(0).ToString(),
-                           Ecosystem_name = dr.GetValue(1).ToString(),
-                           Biotope = dr.GetValue(2).ToString(),
-                           Coordinates = dr.GetValue(3).ToString(),
+                            Author = dr.GetValue(1).ToString(),
+                            Publication_date = Convert.ToDateTime(dr.GetValue(2).ToString()),
+                            link = dr.GetValue(3).ToString(),
                         });
                     }
                 }
-                return ecosystems;
+                return publication;
             }
         }
 
-        public Ecosystem GetEcosystemById(string Id)
+        public Publication GetPublicationById(string Id)
         {
-            string sqlExpression = "selectEcosystemById";
-            Ecosystem ecosystem = null;
+            string sqlExpression = "selectPublicationById";
+            Publication publication = null;
 
             OpenConnection(ConnectionString);
             using (SqlCommand cmd = new SqlCommand(sqlExpression, connect))
@@ -134,24 +134,24 @@ namespace CourseWork.Helpers
                 {
                     while (dr.Read())
                     {
-                        ecosystem = new Ecosystem
+                        publication = new Publication
                         {
                             Id = dr.GetValue(0).ToString(),
-                            Ecosystem_name = dr.GetValue(1).ToString(),
-                            Biotope = dr.GetValue(2).ToString(),
-                            Coordinates = dr.GetValue(3).ToString(),
+                            Author = dr.GetValue(1).ToString(),
+                            Publication_date = Convert.ToDateTime(dr.GetValue(2).ToString()),
+                            link = dr.GetValue(3).ToString(),
                         };
                     }
                 }
-                return ecosystem;
+                return publication;
             }
 
         }
 
-        public Ecosystem GetEcosystemByName(string Ecosystem_name)
+        public Publication GetPublicationByLink(string link)
         {
-            string sqlExpression = "selectEcosystemByName";
-            Ecosystem ecosystem = null;
+            string sqlExpression = "selectPublicationByLink";
+            Publication publication = null;
 
             OpenConnection(ConnectionString);
             using (SqlCommand cmd = new SqlCommand(sqlExpression, connect))
@@ -160,8 +160,8 @@ namespace CourseWork.Helpers
 
                 SqlParameter loginParameter = new SqlParameter
                 {
-                    ParameterName = "@Ecosystem_name",
-                    Value = Ecosystem_name
+                    ParameterName = "@link",
+                    Value = link
                 };
                 cmd.Parameters.Add(loginParameter);
 
@@ -171,24 +171,61 @@ namespace CourseWork.Helpers
                 {
                     while (dr.Read())
                     {
-                        ecosystem = new Ecosystem
+                        publication = new Publication
                         {
                             Id = dr.GetValue(0).ToString(),
-                            Ecosystem_name = dr.GetValue(1).ToString(),
-                            Biotope = dr.GetValue(2).ToString(),
-                            Coordinates = dr.GetValue(3).ToString(),
+                            Author = dr.GetValue(1).ToString(),
+                            Publication_date = Convert.ToDateTime(dr.GetValue(2).ToString()),
+                            link = dr.GetValue(3).ToString(),
                         };
                     }
                 }
-                return ecosystem;
+                return publication;
             }
 
         }
 
-        public Ecosystem GetEcosystemByCoords(string Id)
+        public Publication GetPublicationAfterDate(string Publication_date)
         {
-            string sqlExpression = "selectEcosystemByCoordId";
-            Ecosystem ecosystem = null;
+            string sqlExpression = "selectPublicationAfterDate";
+            Publication publication = null;
+
+            OpenConnection(ConnectionString);
+            using (SqlCommand cmd = new SqlCommand(sqlExpression, connect))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter loginParameter = new SqlParameter
+                {
+                    ParameterName = "@Publication_date",
+                    Value = Publication_date
+                };
+                cmd.Parameters.Add(loginParameter);
+
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+                        publication = new Publication
+                        {
+                            Id = dr.GetValue(0).ToString(),
+                            Author = dr.GetValue(1).ToString(),
+                            Publication_date = Convert.ToDateTime(dr.GetValue(2).ToString()),
+                            link = dr.GetValue(3).ToString(),
+                        };
+                    }
+                }
+                return publication;
+            }
+
+        }
+
+        public Publication GetEcosystemByAuthorId(string Id)
+        {
+            string sqlExpression = "selectPublicationByAuthorId";
+            Publication publication= null;
             OpenConnection(ConnectionString);
             using (SqlCommand cmd = new SqlCommand(sqlExpression, connect))
             {
@@ -207,16 +244,16 @@ namespace CourseWork.Helpers
                 {
                     while (dr.Read())
                     {
-                        ecosystem = new Ecosystem
+                        publication = new Publication
                         {
                             Id = dr.GetValue(0).ToString(),
-                            Ecosystem_name = dr.GetValue(1).ToString(),
-                            Biotope = dr.GetValue(2).ToString(),
-                            Coordinates = dr.GetValue(3).ToString(),
+                            Author = dr.GetValue(1).ToString(),
+                            Publication_date = Convert.ToDateTime(dr.GetValue(2).ToString()),
+                            link = dr.GetValue(3).ToString(),
                         };
                     }
                 }
-                return ecosystem;
+                return publication;
             }
         }
     }

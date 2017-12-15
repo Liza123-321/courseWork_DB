@@ -14,6 +14,7 @@
             <td> Id</td>
             <td>Имя экосистемы</td>
             <td>Имя биотопа</td>
+            <td>ID Местоположения</td>
         </tr>
         @foreach (var b in ViewBag.Ecosystem)
         {
@@ -21,6 +22,7 @@
                 <td>@b.Id </td>
                 <td>@b.Ecosystem_name</td>
                 <td>@b.Biotope</td>
+                <td>@b.Coordinates</td>
 
             </tr>
         }

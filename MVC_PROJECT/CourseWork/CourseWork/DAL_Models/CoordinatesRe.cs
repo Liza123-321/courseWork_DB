@@ -5,10 +5,10 @@ using System.Web;
 
 namespace CourseWork.DAL_Models
 {
-    public class Registration_author
-    {
+    public class CoordinatesRe
+    { 
         public string Id { get; set; }
-        public DateTime Reg_date { get; set; }
-        public string Author { get; set; }
+        public string Type { get; set; }
+        public string Coord { get; set; }
     }
 }

@@ -16,7 +16,7 @@ namespace CourseWork.Models
         public string Bitope { get; set; }
         [Required(ErrorMessage = "id местоположения не может быть пустым.")]
         [Display(Name = "ID Местоположения")]
-        public int Coordinates { get; set; }
+        public string Coordinates { get; set; }
     }
 
 }
