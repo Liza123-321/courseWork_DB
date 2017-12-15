@@ -13,6 +13,7 @@ namespace CourseWork.Controllers
     public class EcoSystemController : Controller
     {
         private EcosystemHelper ecosystem= new EcosystemHelper();
+        private CoordinateHelper coord = new CoordinateHelper();
 
         // GET: EcoSystem
         public ActionResult Index()
@@ -28,6 +29,10 @@ namespace CourseWork.Controllers
             if (ecosystem.GetEcosystemByName(model.Ecosystem_name) != null)
             {
                 TempData["message"] = $"Экосистема с таким именем уже существует!";
+            }
+            else if (coord.GetCoordinateById(model.Coordinates) == null)
+            {
+                TempData["message"] = $"Местоположения с таким ID не существует!";
             }
             else if (ModelState.IsValid)
             {
@@ -48,7 +53,7 @@ namespace CourseWork.Controllers
             try
             {
                 string Id = ecosystem.GetEcosystemByName(model.Detachment_name).Id;
-                 if (ModelState.IsValid)
+                if (ModelState.IsValid)
                 {
                     ecosystem.DeleteEcosystem(Id);
 

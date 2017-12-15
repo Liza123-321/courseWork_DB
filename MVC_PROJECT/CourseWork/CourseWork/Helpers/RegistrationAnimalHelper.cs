@@ -92,7 +92,7 @@ namespace CourseWork.Helpers
             }
         }
 
-        public List<FullReg_animal> GetAllCoordinates()
+        public List<FullReg_animal> GetAllReg_animals()
         {
             string sqlExpression = "selectAllReg_animal";
             List<FullReg_animal> reg_animal= new List<FullReg_animal>();

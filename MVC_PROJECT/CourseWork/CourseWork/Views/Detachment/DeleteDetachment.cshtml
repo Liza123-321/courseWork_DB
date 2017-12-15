@@ -3,6 +3,10 @@
     ViewBag.Title = "Удаление отряда";
 }
 <h2>@ViewBag.Title.</h2>
+@if (TempData["message"] != null)
+{
+    <div class="alert alert-danger">@TempData["message"]</div>
+}
 @using (Html.BeginForm("DeleteDetachment", "Detachment", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()

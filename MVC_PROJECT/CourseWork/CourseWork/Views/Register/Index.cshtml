@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "Register";
+}
+
+<link href="@Url.Content("~/Content/style.css")" rel="stylesheet" type="text/css" />
+<br />
+<div style="background: Gainsboro; height: 50px;" class="panel panel-info">
+    <h1>Все учёты</h1>
+</div>
+
+<h3>
+    <table class="table">
+        <tr>
+            <td>Имя животного</td>
+            <td>Имя автора</td>
+            <td>Описание метода исследования</td>
+            <td>Тип местоположения</td>
+            <td>Местоположение</td>
+        </tr>
+        @foreach (var b in ViewBag.Reg_animal)
+        {
+            <tr>
+                <td>b.Animal_name</td>
+                <td>b.Author_name</td>
+                <td>b.Method_descript</td>
+                <td>b.Coord_type</td>
+                <td>b.Coord_cords</td>
+            </tr>
+        }
+    </table>
+</h3><br /><br />
+<div>
+    <div class="readmore-w3 col-xs-12 col-md-4">@Html.ActionLink("Добавить учёт", "AddRegister", "Register")</div>
+    <div class="readmore-w3 col-xs-12 col-md-4">@Html.ActionLink("Удалить учёт", "DeleteRegister", "Register")</div><br /><br />
+</div>
