@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
 using System.Linq;
 using System.Web;
 using CourseWork.DAL_Models;
 
 namespace CourseWork.Helpers
 {
-    public class SpeciesHelper
+    public class SuborderHelper
     {
+
         private SqlConnection connect;
         public const string ConnectionString = @"Data Source=.;Initial Catalog=ReliseCourse;Integrated Security=True";
 
@@ -25,37 +25,9 @@ namespace CourseWork.Helpers
             connect.Close();
         }
 
-        public List<Species> GetAllSpecies()
+        public bool CreateSuborder(string Id, string Detachment, string Suborder_name,int count_genus)
         {
-            string sqlExpression = "selectSpeciesAll";
-            List<Species> species = new List<Species>();
-            OpenConnection(ConnectionString);
-            using (SqlCommand cmd = new SqlCommand(sqlExpression, connect))
-            {
-                cmd.CommandType = CommandType.StoredProcedure;
-                SqlDataReader dr = cmd.ExecuteReader();
-
-                if (dr.HasRows)
-                {
-                    while (dr.Read())
-                    {
-                        species.Add(new Species
-                        {
-                            Id = dr.GetValue(0).ToString(),
-                            Suborder = dr.GetValue(3).ToString(),
-                            RUS_name= dr.GetValue(1).ToString(),
-                            ENG_name = dr.GetValue(2).ToString()
-
-                        });
-                    }
-                }
-                return species;
-            }
-        }
-
-        public void CreateSpecies(string Id, string Suborder,string RUS_name,string ENG_name)
-        {
-            string sqlExpression = "addSpecies";
+            string sqlExpression = "addSuborder";
 
             OpenConnection(ConnectionString);
             using (SqlCommand command = new SqlCommand(sqlExpression, connect))
@@ -70,37 +42,36 @@ namespace CourseWork.Helpers
 
                 command.Parameters.Add(idParameter);
 
+                SqlParameter nameParameter = new SqlParameter
+                {
+                    ParameterName = "@Detachment",
+                    Value = Detachment
+                };
+
+                command.Parameters.Add(nameParameter);
                 SqlParameter suborderParameter = new SqlParameter
                 {
-                    ParameterName = "@Suborder",
-                    Value = Suborder
+                    ParameterName = "@Suborder_name",
+                    Value = Suborder_name
                 };
 
                 command.Parameters.Add(suborderParameter);
-
-                SqlParameter RusNameParameter = new SqlParameter
+                SqlParameter countParameter = new SqlParameter
                 {
-                    ParameterName = "@RUS_name",
-                    Value = RUS_name
+                    ParameterName = "@Count_genus",
+                    Value = count_genus
                 };
 
-                command.Parameters.Add(RusNameParameter);
-
-                SqlParameter EngNameParameter = new SqlParameter
-                {
-                    ParameterName = "@ENG_name",
-                    Value = ENG_name
-                };
-
-                command.Parameters.Add(EngNameParameter);
+                command.Parameters.Add(countParameter);
                 command.ExecuteScalar();
             }
             CloseConnection();
+            return true;
         }
 
-        public void DeleteSpecies(string Id)
+        public void DeleteSuborder(string Id)
         {
-            string sqlExpression = "deleteSpecies";
+            string sqlExpression = "deleteSuborder";
 
             OpenConnection(ConnectionString);
             using (SqlCommand cmd = new SqlCommand(sqlExpression, connect))
@@ -117,10 +88,37 @@ namespace CourseWork.Helpers
             }
         }
 
-        public Species GetSpeciesById(string Id)
+        public List<Suborder> GetAllSuborder()
         {
-            string sqlExpression = "selectSpeciesById";
-            Species species = null;
+            string sqlExpression = "selectSuborderAll";
+            List<Suborder> Suborders = new List<Suborder>();
+            OpenConnection(ConnectionString);
+            using (SqlCommand cmd = new SqlCommand(sqlExpression, connect))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr.HasRows)
+                {
+                    while (dr.Read())
+                    {
+                        Suborders.Add(new Suborder
+                        {
+                            Id = dr.GetValue(0).ToString(),
+                            Detachment = dr.GetValue(1).ToString(),
+                            Suborder_name = dr.GetValue(2).ToString(),
+                            Count_genus = dr.GetValue(3).ToString(),
+                        });
+                    }
+                }
+                return Suborders;
+            }
+        }
+
+        public Suborder GetSuborderById(string Id)
+        {
+            string sqlExpression = "selectSuborderById";
+            Suborder suborder = null;
 
             OpenConnection(ConnectionString);
             using (SqlCommand cmd = new SqlCommand(sqlExpression, connect))
@@ -140,61 +138,25 @@ namespace CourseWork.Helpers
                 {
                     while (dr.Read())
                     {
-                        species = new Species
+                        suborder = new Suborder
                         {
                             Id = dr.GetValue(0).ToString(),
-                            Suborder = dr.GetValue(1).ToString(),
-                            RUS_name = dr.GetValue(2).ToString(),
-                            ENG_name = dr.GetValue(3).ToString(),
+                            Detachment = dr.GetValue(1).ToString(),
+                            Suborder_name = dr.GetValue(2).ToString(),
+                            Count_genus = dr.GetValue(3).ToString(),
+
                         };
                     }
                 }
-                return species;
+                return suborder;
             }
 
         }
 
-        public Species GetSpeciesByRusName(string RUS_name)
+        public Suborder GetSuborderByName(string Suborder_name)
         {
-            string sqlExpression = "selectSpeciesByRUSName";
-            Species species = null;
-
-            OpenConnection(ConnectionString);
-            using (SqlCommand cmd = new SqlCommand(sqlExpression, connect))
-            {
-                cmd.CommandType = CommandType.StoredProcedure;
-
-                SqlParameter nameParameter = new SqlParameter
-                {
-                    ParameterName = "@RUS_name",
-                    Value = RUS_name
-                };
-                cmd.Parameters.Add(nameParameter);
-
-                SqlDataReader dr = cmd.ExecuteReader();
-
-                if (dr.HasRows)
-                {
-                    while (dr.Read())
-                    {
-                        species = new Species
-                        {
-                            Id = dr.GetValue(0).ToString(),
-                            Suborder = dr.GetValue(3).ToString(),
-                            RUS_name = dr.GetValue(1).ToString(),
-                            ENG_name = dr.GetValue(2).ToString(),
-                        };
-                    }
-                }
-                return species;
-            }
-
-        }
-
-        public Species GetSpeciesByEngName(string ENG_name)
-        {
-            string sqlExpression = "selectSpeciesByENGName";
-            Species species = null;
+            string sqlExpression = "selectSuborderByName";
+            Suborder suborder = null;
 
             OpenConnection(ConnectionString);
             using (SqlCommand cmd = new SqlCommand(sqlExpression, connect))
@@ -203,8 +165,8 @@ namespace CourseWork.Helpers
 
                 SqlParameter loginParameter = new SqlParameter
                 {
-                    ParameterName = "@ENG_name",
-                    Value = ENG_name
+                    ParameterName = "@Suborder_name",
+                    Value = Suborder_name
                 };
                 cmd.Parameters.Add(loginParameter);
 
@@ -214,35 +176,34 @@ namespace CourseWork.Helpers
                 {
                     while (dr.Read())
                     {
-                        species = new Species
+                        suborder = new Suborder
                         {
                             Id = dr.GetValue(0).ToString(),
-                            Suborder = dr.GetValue(3).ToString(),
-                            RUS_name = dr.GetValue(1).ToString(),
-                            ENG_name = dr.GetValue(2).ToString(),
+                            Detachment = dr.GetValue(1).ToString(),
+                            Suborder_name = dr.GetValue(2).ToString(),
+                            Count_genus = dr.GetValue(3).ToString(),
                         };
                     }
                 }
-                return species;
+                return suborder;
             }
 
         }
 
-
-        public Species GetSpeciesBySuborder(string Suborder_Id)
+        public Suborder GetSuborderByDetach(string Detach_Id)
         {
-            string sqlExpression = "selectSpeciesByIdSuborder";
-            Species species = null;
+            string sqlExpression = "selectSuborderByDetachId";
+            Suborder suborder = null;
             OpenConnection(ConnectionString);
             using (SqlCommand cmd = new SqlCommand(sqlExpression, connect))
             {
-
+   
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 SqlParameter loginParameter = new SqlParameter
                 {
                     ParameterName = "@Id",
-                    Value = Suborder_Id
+                    Value = Detach_Id
                 };
                 cmd.Parameters.Add(loginParameter);
                 SqlDataReader dr = cmd.ExecuteReader();
@@ -251,16 +212,16 @@ namespace CourseWork.Helpers
                 {
                     while (dr.Read())
                     {
-                        species = new Species
+                        suborder = new Suborder
                         {
                             Id = dr.GetValue(0).ToString(),
-                            Suborder = dr.GetValue(3).ToString(),
-                            RUS_name = dr.GetValue(1).ToString(),
-                            ENG_name = dr.GetValue(2).ToString(),
+                            Detachment = dr.GetValue(1).ToString(),
+                            Suborder_name = dr.GetValue(2).ToString(),
+                            Count_genus = dr.GetValue(3).ToString(),
                         };
                     }
                 }
-                return species;
+                return suborder;
             }
         }
     }

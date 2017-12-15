@@ -9,7 +9,7 @@ namespace CourseWork.Models
     public class DetachmentViewModels
     {
         [Required(ErrorMessage = "Поле имени отряда не может быть пустым.")]
-        [Display(Name = "Отряд")]
+        [Display(Name = "Имя")]
         public string Detachment_name { get; set; }
     }
     public class SpeciesViewModels
@@ -23,5 +23,17 @@ namespace CourseWork.Models
         [Required(ErrorMessage = "Поле подотряда не может быть пустым.")]
         [Display(Name = "Подотряд")]
         public string Suborder { get; set; }
+    }
+    public class SuborderViewModels
+    {
+        [Required(ErrorMessage = "Поле имени отряда не может быть пустым.")]
+        [Display(Name = "Отряд")]
+        public string Detachment { get; set; }
+        [Required(ErrorMessage = "Поле имени подотряда не может быть пустым.")]
+        [Display(Name = "Имя подотряда")]
+        public string Suborder_name{ get; set; }
+        [Required(ErrorMessage = "Поле количетсва родов не может быть пустым.")]
+        [Display(Name = "Количество родов")]
+        public int Count_genus { get; set; }
     }
 }

@@ -1,30 +1,31 @@
-﻿@model CourseWork.Models.SpeciesViewModels
+﻿
+@model CourseWork.Models.SuborderViewModels
 @{
-    ViewBag.Title = "Создание вида";
+    ViewBag.Title = "Создание подотряда";
 }
 <h2>@ViewBag.Title.</h2>
-@using (Html.BeginForm("AddSpecies", "Detachment", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("AddSuborder", "Detachment", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    <h4>Создайте новый вид.</h4>
+    <h4>Создайте новый подотряд.</h4>
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">
-        @Html.LabelFor(m => m.Suborder, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.Detachment, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Suborder, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.Detachment, new { @class = "form-control" })
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Species_name_RUS, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.Suborder_name, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Species_name_RUS, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.Suborder_name, new { @class = "form-control" })
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.Species_name_ENG, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.Count_genus, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Species_name_ENG, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.Count_genus, new { @class = "form-control" })
         </div>
     </div>
     <div class="form-group">
@@ -37,5 +38,3 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
-
-

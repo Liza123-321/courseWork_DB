@@ -27,7 +27,7 @@
                 <h4>Экосистемы</h4>
                 <p>Приложение предоставляет информацию о всех экосистемах Беларуси.
                     Это позволит вам получить большой объем данных для научно-исследовательской деятельности.</p>
-                <div class="readmore-w3"><a class="readmore" href="#" data-toggle="modal" data-target="#myModal2">Read More</a></div>
+                <div class="readmore-w3">@Html.ActionLink("Перейти к экосистемам", "Index", "EcoSystem")</div>
                 <!-- Modal2 -->
                 <div class="modal fade" id="myModal2" role="dialog">
                     <div class="modal-dialog">
@@ -71,7 +71,7 @@
 </div>
 <!--//offer-->
 <!--footer-->
-<div class="footer container-fluid">
+<div class="footer" style="width:100%">
     <div class="container">
         <div class="footer-content-agile">
             <div class="col-md-4 about-us-agile">
@@ -107,20 +107,3 @@
     </div>
 </div>
 <!--/footer -->
-<!-- smooth scrolling -->
-<script type="text/javascript">
-    $(document).ready(function() {
-        /*
-            var defaults = {
-            containerID: 'toTop', // fading element id
-            containerHoverID: 'toTopHover', // fading element hover id
-            scrollSpeed: 1200,
-            easingType: 'linear' 
-            };
-        */								
-        $().UItoTop({ easingType: 'easeOutQuart' });
-    });
-</script>
-<a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
-<!-- //smooth scrolling -->
-<script type="text/javascript" src="js/bootstrap-3.1.1.min.js"></script>

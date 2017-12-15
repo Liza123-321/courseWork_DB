@@ -1,8 +1,32 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Ecosystem";
 }
-<h1>
-ALL ECOSYSTEM
-</h1>
 
+<link href="@Url.Content("~/Content/style.css")" rel="stylesheet" type="text/css" />
+<br/>
+<div style="background: Gainsboro; height: 50px;" class="panel panel-info" >
+    <h1>Экосистемы</h1>
+</div>
+
+<h3>
+    <table class="table">
+        <tr>
+            <td> Id</td>
+            <td>Имя экосистемы</td>
+            <td>Имя биотопа</td>
+        </tr>
+        @foreach (var b in ViewBag.Ecosystem)
+        {
+            <tr>
+                <td>@b.Id </td>
+                <td>@b.Ecosystem_name</td>
+                <td>@b.Biotope</td>
+
+            </tr>
+        }
+    </table>
+</h3><br /><br />
+<div>
+    <div class="readmore-w3 col-xs-12 col-md-4">@Html.ActionLink("Добавить экосистему", "AddEcosystem", "EcoSystem")</div>
+    <div class="readmore-w3 col-xs-12 col-md-4">@Html.ActionLink("Удалить экосистему", "DeleteEcosystem", "EcoSystem")</div><br /><br />
+</div>

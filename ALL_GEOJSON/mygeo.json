@@ -2,5 +2,11 @@
     [{"type":"Feature","id":"56679924","geometry":
         {"type":"Point","coordinates":[27.537575,52.892229]},"properties":{"ID":1,"ADDRESS":"Soligorsk district","LATITUDE":52.892229,"LONGITUDE":27.537575}},
     {"type":"Feature","id":"56679925","geometry":
-        {"type":"Point","coordinates":[25.537575,54.892229]},"properties":{"ID":1,"ADDRESS":"Minsk district","LATITUDE":52.892229,"LONGITUDE":27.537575}}]
+        {"type":"Point","coordinates":[25.537575,54.892229]},"properties":{"ID":1,"ADDRESS":"Minsk district","LATITUDE":52.892229,"LONGITUDE":27.537575}},
+		{  "type":"Feature",  "id":"1", 
+ "geometry":{
+	 "type":"Point", 
+	 "coordinates":[27.537575,52.892229]   }, 
+	 "properties":  
+	 {    "ID":"1",    "ADDRESS":"Test Addr",    "LATITUDE":27.537575,    "LONGITUDE":52.892229    }  }]
             ,"name":"Transportation - DC","updated_at":1405035068000}
