@@ -50,7 +50,8 @@ namespace CourseWork.Controllers
             }
             else
             {
-                CreateCookie(model.Login, model.Password);
+              //  CreateCookie(model.Login, model.Password);
+                TempData["user"] = $"Вы успешно авторизировались";
                 return RedirectToAction("Index", "Home");
             }
             return View(model);
@@ -83,15 +84,6 @@ namespace CourseWork.Controllers
             }
 
             return View(model);
-        }
-
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult LogOff()
-        {
-            FormsAuthentication.SignOut();
-            return RedirectToAction("Index", "Home");
         }
 
         #region Helpers

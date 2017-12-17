@@ -154,7 +154,7 @@ namespace CourseWork.Helpers
 
                 SqlParameter loginParameter = new SqlParameter
                 {
-                    ParameterName = "@Id",
+                    ParameterName = "@Author",
                     Value = Id
                 };
                 cmd.Parameters.Add(loginParameter);

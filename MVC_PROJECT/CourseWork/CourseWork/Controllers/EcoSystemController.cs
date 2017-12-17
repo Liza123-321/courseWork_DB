@@ -40,6 +40,7 @@ namespace CourseWork.Controllers
                 ecosystem.CreateEcosystem(Id, model.Ecosystem_name,model.Bitope,model.Coordinates);
 
                 TempData["message"] = $"Экосистема успешно создана";
+                TempData["added"] = $"Экосистема успешно создана";
                 //     return RedirectToAction("Index", "Detachment");
 
             }

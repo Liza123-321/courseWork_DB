@@ -109,7 +109,7 @@ namespace CourseWork.Helpers
 
         public Author GetAuthorById(string Id)
         {
-            string sqlExpression = "selectAuthorId";
+            string sqlExpression = "selectAuthorById";
             Author author = null;
 
             OpenConnection(ConnectionString);

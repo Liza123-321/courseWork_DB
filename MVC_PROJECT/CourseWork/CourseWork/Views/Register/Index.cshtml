@@ -7,6 +7,10 @@
 <div style="background: Gainsboro; height: 50px;" class="panel panel-info">
     <h1>Все учёты</h1>
 </div>
+@if (TempData["message"] != null && TempData["added"] == null)
+{
+    <div class="alert alert-danger">@TempData["message"]</div>
+}
 
 <h3>
     <table class="table">
@@ -16,20 +20,23 @@
             <td>Описание метода исследования</td>
             <td>Тип местоположения</td>
             <td>Местоположение</td>
+            <td>Удаление</td>
         </tr>
         @foreach (var b in ViewBag.Reg_animal)
         {
             <tr>
-                <td>b.Animal_name</td>
-                <td>b.Author_name</td>
-                <td>b.Method_descript</td>
-                <td>b.Coord_type</td>
-                <td>b.Coord_cords</td>
+                <td>@b.Animal_name</td>
+                <td>@b.Author_name</td>
+                <td>@b.Method_descript</td>
+                <td>@b.Coord_type</td>
+                <td>@b.Coord_cords</td>
+                <td><div class="readmore-w3 ">@Html.ActionLink("Удалить","DiscardReg", "Register", new { id = @b.Id })</div></td>
             </tr>
         }
     </table>
 </h3><br /><br />
 <div>
-    <div class="readmore-w3 col-xs-12 col-md-4">@Html.ActionLink("Добавить учёт", "AddRegister", "Register")</div>
-    <div class="readmore-w3 col-xs-12 col-md-4">@Html.ActionLink("Удалить учёт", "DeleteRegister", "Register")</div><br /><br />
+    <div class="readmore-w3 col-xs-12 col-md-4">@Html.ActionLink("Добавить учёт автора", "AddRegister", "Register")</div>
+    <div class="readmore-w3 col-xs-12 col-md-4">@Html.ActionLink("Добавить учёт животного", "AddRegisterAnimal", "Register")</div>
+    <div class="readmore-w3 col-xs-12 col-md-4">@Html.ActionLink("Удалить учёт автора", "DeleteRegister", "Register")</div><br /><br />
 </div>

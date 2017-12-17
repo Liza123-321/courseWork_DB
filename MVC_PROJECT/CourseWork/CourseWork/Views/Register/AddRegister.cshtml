@@ -1,1 +1,44 @@
 ﻿
+@model CourseWork.Models.RegAddAuthorViewModel
+@{
+    ViewBag.Title = "Создание учёта автора";
+}
+<h2>@ViewBag.Title.</h2>
+@if (TempData["added"] != null)
+{
+    <div class="alert alert-success">@TempData["message"]</div>
+}
+@if (TempData["message"] != null && TempData["added"] == null)
+{
+    <div class="alert alert-danger">@TempData["message"]</div>
+}
+@using (Html.BeginForm("AddRegister", "Register", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>Создайте новую экоситему.</h4>
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(m => m.Author, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Author, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Date, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Date, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Создать" style="background-color: rgba(26, 94, 113, 0.83);color:white" />
+            <p class="btn btn-default">@Html.ActionLink("Назад", "Index", "Register")</p>
+        </div>
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
