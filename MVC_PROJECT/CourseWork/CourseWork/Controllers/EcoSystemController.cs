@@ -18,7 +18,19 @@ namespace CourseWork.Controllers
         // GET: EcoSystem
         public ActionResult Index()
         {
-            ViewBag.Ecosystem = ecosystem.GetAllEcosystems();
+            List<Ecosystem> ecosystem1 = ecosystem.GetAllEcosystems();
+            List<CoordinatesRe> coord1 = coord.GetAllCoordinatesRe();
+            foreach (Ecosystem i in ecosystem1)
+            {
+                foreach (CoordinatesRe j in coord1)
+                {
+                    if (i.Coordinates == j.Id)
+                        i.Coordinates = j.Coord;
+                }
+            }
+            ViewBag.Ecosystem = ecosystem1;
+             
+            ViewBag.CoordRe = coord.GetAllCoordinatesRe();
             return View();
         }
 

@@ -28,6 +28,7 @@ namespace CourseWork.Models
         [Display(Name = "Author")]
         public string Author { get; set; }
 
+        [RegularExpression((@"([0-2]\d|3[01])\.(0\d|1[012])\.(\d{4})"), ErrorMessage = "Введите корректную дату")]
         [Required(ErrorMessage = "Поле даты учёта не может быть пустым.")]
         [Display(Name = "Date")]
         public string Date { get; set; }

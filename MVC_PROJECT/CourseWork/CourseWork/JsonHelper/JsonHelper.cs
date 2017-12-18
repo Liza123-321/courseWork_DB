@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Web;
 using System.Runtime.Serialization.Json;
+using System.Security.Policy;
 using System.Text;
 
 namespace CourseWork.JsonHelper
@@ -43,6 +44,20 @@ namespace CourseWork.JsonHelper
     }
     public class JsonHelper
     {
+        public void ToGeo(string allGeoJson)
+        {
+            using (FileStream fstream = new FileStream(@"D:\3 COURSE\COURSE_PETS\geo.json", FileMode.OpenOrCreate))
+            {
+                string toJson = "{\"type\":\"FeatureCollection\",\"features\":\r\n    [";
+                string endFail = " ]\r\n }";
+                // преобразуем строку в байты
+                string dellLast = allGeoJson.Remove(allGeoJson.Length-1);
+                byte[] array = System.Text.Encoding.Default.GetBytes(toJson+ dellLast + endFail);
+                // запись массива байтов в файл
+                fstream.Write(array, 0, array.Length);
+                Console.WriteLine("Текст записан в файл");
+            }
+        }
         public string ToJson<T>(T obj)
         {
             DataContractJsonSerializer serializer = new DataContractJsonSerializer(obj.GetType());

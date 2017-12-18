@@ -208,7 +208,7 @@ namespace CourseWork.Helpers
 
                 SqlParameter loginParameter = new SqlParameter
                 {
-                    ParameterName = "@Id",
+                    ParameterName = "@Animal_name",
                     Value = Id
                 };
                 cmd.Parameters.Add(loginParameter);

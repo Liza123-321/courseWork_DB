@@ -73,7 +73,7 @@ namespace CourseWork.Helpers
             CloseConnection();
         }
 
-        public void DeleteRegAnimal(string Id)
+        public void DeleteRegAnimal(string id)
         {
             string sqlExpression = "deleteRegistration_animal";
 
@@ -85,7 +85,7 @@ namespace CourseWork.Helpers
                 SqlParameter loginParameter = new SqlParameter
                 {
                     ParameterName = "@Id",
-                    Value = Id
+                    Value = id
                 };
                 cmd.Parameters.Add(loginParameter);
                 cmd.ExecuteScalar();

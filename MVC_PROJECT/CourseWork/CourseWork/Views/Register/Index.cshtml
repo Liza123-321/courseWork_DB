@@ -5,22 +5,17 @@
 <link href="@Url.Content("~/Content/style.css")" rel="stylesheet" type="text/css" />
 <br />
 <div style="background: Gainsboro; height: 50px;" class="panel panel-info">
-    <h1>Все учёты</h1>
+    <h1>Все учёты животных</h1>
 </div>
-@if (TempData["message"] != null && TempData["added"] == null)
-{
-    <div class="alert alert-danger">@TempData["message"]</div>
-}
-
 <h3>
     <table class="table">
-        <tr>
+        <tr  style="background-color: rgba(26, 94, 113, 0.15)">
             <td>Имя животного</td>
             <td>Имя автора</td>
             <td>Описание метода исследования</td>
             <td>Тип местоположения</td>
             <td>Местоположение</td>
-            <td>Удаление</td>
+            <td> </td>
         </tr>
         @foreach (var b in ViewBag.Reg_animal)
         {
@@ -30,13 +25,55 @@
                 <td>@b.Method_descript</td>
                 <td>@b.Coord_type</td>
                 <td>@b.Coord_cords</td>
-                <td><div class="readmore-w3 ">@Html.ActionLink("Удалить","DiscardReg", "Register", new { id = @b.Id })</div></td>
+                <td><div class="readmore-w3 ">@Html.ActionLink("Удалить","DiscardRegAnimal", "Register", new { id= @b.Id })</div></td>
+            </tr>
+        }
+    </table>
+</h3><br /><br />
+<div>
+    <div class="readmore-w3 col-xs-12 col-md-4">@Html.ActionLink("Добавить учёт животного", "AddRegisterAnimal", "Register")</div><br /><br />
+</div>
+<div style="background: Gainsboro; height: 50px;" class="panel panel-info">
+    <h1>Все учёты авторов</h1>
+</div>
+<h3>
+    <table class="table">
+        <tr style="background-color: rgba(26, 94, 113, 0.15)">
+            <td>Дата</td>
+            <td>Имя автора</td>
+            <td> </td>
+        </tr>
+        @foreach (var b in ViewBag.Reg_author)
+        {
+            <tr>
+                <td>@b.Reg_date</td>
+                <td>@b.Author</td>
+                <td><div class="readmore-w3 ">@Html.ActionLink("Удалить","DiscardRegAuthor", "Register", new { id = @b.Id })</div></td>
             </tr>
         }
     </table>
 </h3><br /><br />
 <div>
     <div class="readmore-w3 col-xs-12 col-md-4">@Html.ActionLink("Добавить учёт автора", "AddRegister", "Register")</div>
-    <div class="readmore-w3 col-xs-12 col-md-4">@Html.ActionLink("Добавить учёт животного", "AddRegisterAnimal", "Register")</div>
-    <div class="readmore-w3 col-xs-12 col-md-4">@Html.ActionLink("Удалить учёт автора", "DeleteRegister", "Register")</div><br /><br />
+    <br /><br />
 </div>
+<div style="background: Gainsboro; height: 50px;" class="panel panel-info">
+    <h1>Методы исследования</h1>
+</div>
+<h3>
+    <table class="table">
+        <tr style="background-color: rgba(26, 94, 113, 0.15)">
+            <td>ID</td>
+            <td>Описание</td>
+            <td>Единицы измерения</td>
+        </tr>
+        @foreach (var b in ViewBag.Methods)
+        {
+            <tr>
+                <td>@b.Id</td>
+                <td>@b.Descript</td>
+                <td>@b.Units</td>
+            </tr>
+        }
+    </table>
+</h3><br /><br />

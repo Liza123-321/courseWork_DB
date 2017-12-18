@@ -60,7 +60,7 @@ namespace CourseWork.Helpers
             CloseConnection();
         }
 
-        public void DeleteReg_author(string Id)
+        public void DeleteReg_author(string id)
         {
             string sqlExpression = "deleteRegistration_author";
 
@@ -72,7 +72,7 @@ namespace CourseWork.Helpers
                 SqlParameter loginParameter = new SqlParameter
                 {
                     ParameterName = "@Id",
-                    Value = Id
+                    Value = id
                 };
                 cmd.Parameters.Add(loginParameter);
                 cmd.ExecuteScalar();

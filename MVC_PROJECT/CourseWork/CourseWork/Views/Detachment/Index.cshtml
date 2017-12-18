@@ -29,6 +29,34 @@
     <div class="readmore-w3 col-xs-12 col-md-4">@Html.ActionLink("Удалить отряд", "DeleteDetachment", "Detachment")</div><br /><br />
 </div>
 
+
+<div style="background: Gainsboro;" class="panel panel-info">
+    <h1>Подотряды животных</h1>
+</div>
+<h3>
+    <table class="table">
+        <tr style="background-color: rgba(26, 94, 113, 0.15)">
+            @*<td> Id</td>*@
+            <td> Имя отряда</td>
+            <td> Имя подотряда</td>
+            <td> Количество родов</td>
+        </tr>
+        @foreach (var b in ViewBag.Suborder)
+        {
+            <tr>
+                @*<td>@b.Id </td>*@
+                <td>@b.Detachment</td>
+                <td>@b.Suborder_name</td>
+                <td>@b.Count_genus</td>
+
+            </tr>
+        }
+    </table>
+</h3><br /><br />
+<div>
+    <div class="readmore-w3 col-xs-12 col-md-4">@Html.ActionLink("Добавить подотряд", "AddSuborder", "Detachment")</div>
+    <div class="readmore-w3 col-xs-12 col-md-4">@Html.ActionLink("Удалить подотряд", "DeleteSuborder", "Detachment")</div><br /><br />
+</div>
 <div style="background: Gainsboro;" class="panel panel-info">
     <h1>Виды животных</h1>
 </div>
@@ -57,32 +85,4 @@
     <div class="readmore-w3 col-xs-12 col-md-4">@Html.ActionLink("Удалить вид", "DeleteSpecies", "Detachment")</div><br /><br />
 </div>
 <br /><br />
-<div style="background: Gainsboro;" class="panel panel-info">
-    <h1>Подотряды животных</h1>
-</div>
-<h3>
-    <table class="table">
-        <tr style="background-color: rgba(26, 94, 113, 0.15)">
-            @*<td> Id</td>*@
-            <td> Имя отряда</td>
-            <td> Имя подотряда</td>
-            <td> Количество родов</td>
-        </tr>
-        @foreach (var b in ViewBag.Suborder)
-        {
-            <tr>
-                @*<td>@b.Id </td>*@
-                <td>@b.Detachment</td>
-                <td>@b.Suborder_name</td>
-                <td>@b.Count_genus</td>
-
-            </tr>
-        }
-    </table>
-</h3><br /><br />
-<div>
-    <div class="readmore-w3 col-xs-12 col-md-4">@Html.ActionLink("Добавить подотряд", "AddSuborder", "Detachment")</div>
-    <div class="readmore-w3 col-xs-12 col-md-4">@Html.ActionLink("Удалить подотряд", "DeleteSuborder", "Detachment")</div><br /><br />
-</div>
-
 

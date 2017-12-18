@@ -1,0 +1,49 @@
+{"type":"FeatureCollection","features":
+    [{
+"type":"Feature",
+"id":"1",
+"geometry":
+        {
+		"type":"Point",
+		"coordinates":[27.537575,52.892229]
+		},
+"properties":
+		{
+		"ID":"1",
+		"ADDRESS":"Test Addr",
+		"LATITUDE":27.537575,
+		"LONGITUDE":52.892229
+		}
+}, {"type":"Feature","id":"56679926","geometry":
+            {"type":"LineString","coordinates":[[25.537575,54.892229],[27.537575,52.892229]]},"properties":{"ID":1,"ADDRESS":"Minsk district","LATITUDE":52.892229,"LONGITUDE":27.537575}},{
+"type":"Feature",
+"id":"5789abd2-945e-468c-977e-d78cac5cd51a",
+"geometry":
+        {
+		"type":"Point",
+		"coordinates":[27,54]
+		},
+"properties":
+		{
+		"ID":"5789abd2-945e-468c-977e-d78cac5cd51a",
+		"ADDRES":"wewer",
+		"LATITUDE":27,
+		"LONGITUDE":54
+		}
+},{
+"type":"Feature",
+"id":"5fee2b13-4581-4eb4-85ab-d5e66793aefe",
+"geometry":
+        {
+		"type":"Point",
+		"coordinates":[56.245,27.34234]
+		},
+"properties":
+		{
+		"ID":"5fee2b13-4581-4eb4-85ab-d5e66793aefe",
+		"ADDRES":"Test",
+		"LATITUDE":56.245,
+		"LONGITUDE":27.34234
+		}
+} ]
+ }
